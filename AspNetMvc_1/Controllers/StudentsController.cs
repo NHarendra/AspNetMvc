@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetMvc_1.Data;
 using AspNetMvc_1.Models;
+using AspNetMvc_1.ViewModels;
 
 namespace AspNetMvc_1.Controllers
 {
@@ -46,7 +47,16 @@ namespace AspNetMvc_1.Controllers
         // GET: Students/Create
         public IActionResult Create()
         {
-            return View();
+            var courses = _context.Courses.Select(s => new SelectListItem()
+            {
+                Text = s.Title,
+                Value = s.Id.ToString()
+
+            }).ToList();
+            CreateStudentViewModel vm = new CreateStudentViewModel();
+            vm.Courses = courses;
+            vm.Enrolled = DateTime.Now;
+            return View(vm);
         }
 
         // POST: Students/Create
@@ -54,15 +64,27 @@ namespace AspNetMvc_1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Enrolled")] Student student)
+        public async Task<IActionResult> Create(CreateStudentViewModel obj)
         {
-            if (ModelState.IsValid)
+            Student stu = new Student();
+            stu.Name = obj.Name;
+            stu.Enrolled = obj.Enrolled;
+
+
+            _context.Students.Add(stu);
+            _context.SaveChanges();
+
+            var selectedCourses = obj.Courses.Where(w => w.Selected).Select(s => s.Value).ToList();
+            foreach (var item in selectedCourses)
             {
-                _context.Add(student);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                 StudentCourse su = new StudentCourse();
+                su.CourseId = int.Parse(item);
+                su.StudentId = stu.Id;
+                _context.StudentCourses.Add(su);
+                _context.SaveChanges();
             }
-            return View(student);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Students/Edit/5

@@ -12982,11 +12982,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\AspNetMvc\\AspNetMvc_1\\AspNetMvc_1\\AspNetMvc_1.csproj",
+      "projectUniqueName": "D:\\Innolat_Github_Repo\\EzzyCart_Demo\\AspNetMvc\\AspNetMvc_1\\AspNetMvc_1.csproj",
       "projectName": "AspNetMvc_1",
-      "projectPath": "D:\\AspNetMvc\\AspNetMvc_1\\AspNetMvc_1\\AspNetMvc_1.csproj",
+      "projectPath": "D:\\Innolat_Github_Repo\\EzzyCart_Demo\\AspNetMvc\\AspNetMvc_1\\AspNetMvc_1.csproj",
       "packagesPath": "C:\\Users\\Nirmal\\.nuget\\packages\\",
-      "outputPath": "D:\\AspNetMvc\\AspNetMvc_1\\AspNetMvc_1\\obj\\",
+      "outputPath": "D:\\Innolat_Github_Repo\\EzzyCart_Demo\\AspNetMvc\\AspNetMvc_1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
